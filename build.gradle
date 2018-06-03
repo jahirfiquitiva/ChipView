@@ -32,8 +32,8 @@ buildscript {
 }
 
 ext {
-    version = 2
-    versionName = "0.0.2"
+    version = 3
+    versionName = "0.0.3"
 }
 
 allprojects {

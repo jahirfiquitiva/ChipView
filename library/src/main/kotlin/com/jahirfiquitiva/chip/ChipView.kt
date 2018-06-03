@@ -27,11 +27,11 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.RequiresApi
 import android.support.annotation.StringRes
 import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.CardView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 
@@ -41,8 +41,8 @@ open class ChipView : LinearLayout {
     private var chipRoot: LinearLayout? = null
     private var cardView: CardView? = null
     private var textView: TextView? = null
-    private var iconView: AppCompatImageView? = null
-    private var actionIconView: AppCompatImageView? = null
+    private var iconView: ImageView? = null
+    private var actionIconView: ImageView? = null
     
     var text: String
         get() = textView?.text.toString()
