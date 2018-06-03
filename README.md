@@ -10,8 +10,8 @@ Yep, another Material Chip view library. Just because the Android Support librar
 
 # Preview
 
-<p align="center">
-<img src="https://github.com/jahirfiquitiva/ChipView/raw/master/preview.png" height="350"/>
+<p>
+<img src="https://github.com/jahirfiquitiva/ChipView/raw/master/preview.png" height="400"/>
 </p>
 
 ---
@@ -39,7 +39,7 @@ where `{latest version}` corresponds to published version in   [![JitPack](https
 
 
 ## How to implement
-:page_with_curl: Everything you need to know can be found in the **[Sample App](https://github.com/jahirfiquitiva/ChipView/tree/master/app/)**
+:page_with_curl: You can check the **[sample App](https://github.com/jahirfiquitiva/ChipView/tree/master/app/)** for details
 
 ---
 
