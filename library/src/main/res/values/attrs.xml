@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ChipView">
+        <attr name="chipBgColor" format="color|reference" />
+        <attr name="chipText" format="string|reference" />
+        <attr name="chipTextColor" format="color|reference" />
+        <attr name="chipElevation" format="dimension|reference" />
+        <attr name="chipRadius" format="dimension|reference" />
+        <attr name="chipIcon" format="reference" />
+        <attr name="chipActionIcon" format="reference" />
+    </declare-styleable>
+</resources>

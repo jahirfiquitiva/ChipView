@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp">
+
+    <com.jahirfiquitiva.chip.ChipView
+        android:id="@+id/chip"
+        android:layout_margin="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:chipText="I am Chip" />
+
+    <com.jahirfiquitiva.chip.ChipView
+        android:id="@+id/icon_chip"
+        android:layout_margin="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:chipRadius="4dp"
+        app:chipBgColor="#625"
+        app:chipTextColor="#fff"
+        app:chipText="I am Chip"
+        app:chipIcon="@drawable/ic_palette" />
+
+    <com.jahirfiquitiva.chip.ChipView
+        android:id="@+id/action_chip"
+        android:layout_margin="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:chipText="I am Chip"
+        app:chipActionIcon="@drawable/ic_close"
+        app:chipElevation="2dp" />
+
+</LinearLayout>
