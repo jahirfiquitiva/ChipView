@@ -6,6 +6,8 @@
 
 Yep, another Material Chip view library. Just because the Android Support library v 28.x is still in alpha and because no other chip library has been able to provide the simplicity I need (regardless of all their features).
 
+You can download a [sample app here](http://j.mp/ChipViewSample).
+
 ---
 
 # Preview
