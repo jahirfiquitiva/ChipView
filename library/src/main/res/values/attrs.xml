@@ -23,5 +23,7 @@
         <attr name="chipRadius" format="dimension|reference" />
         <attr name="chipIcon" format="reference" />
         <attr name="chipActionIcon" format="reference" />
+        <attr name="chipStrokeWidth" format="dimension|reference" />
+        <attr name="chipStrokeColor" format="color|reference" />
     </declare-styleable>
 </resources>

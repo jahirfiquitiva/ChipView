@@ -19,6 +19,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.support.annotation.ColorInt
@@ -34,6 +35,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import kotlin.math.roundToInt
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 open class ChipView : LinearLayout {
@@ -56,10 +58,24 @@ open class ChipView : LinearLayout {
             cardView?.radius = value
         }
     
-    var bgColor: ColorStateList?
-        get() = cardView?.cardBackgroundColor
+    @ColorInt
+    var bgColor: Int = 0
+        private set(value) {
+            field = value
+            internalSetBackground()
+        }
+    
+    var strokeWidth: Int = 0
         set(value) {
-            cardView?.setCardBackgroundColor(value)
+            field = value
+            internalSetBackground()
+        }
+    
+    @ColorInt
+    var strokeColor: Int = cardView?.cardBackgroundColor?.defaultColor ?: 0
+        set(value) {
+            field = value
+            internalSetBackground()
         }
     
     constructor(context: Context) : super(context) {
@@ -86,10 +102,6 @@ open class ChipView : LinearLayout {
         
         val styles = context.obtainStyledAttributes(attrs, R.styleable.ChipView, 0, 0)
         try {
-            setBackgroundColor(
-                styles.getColor(
-                    R.styleable.ChipView_chipBgColor,
-                    ContextCompat.getColor(context, R.color.default_chip_bg_color)))
             text = styles.getString(R.styleable.ChipView_chipText) ?: ""
             setTextColor(
                 styles.getColor(
@@ -97,6 +109,17 @@ open class ChipView : LinearLayout {
                     ContextCompat.getColor(context, R.color.default_chip_text_color)))
             elevation = styles.getDimension(R.styleable.ChipView_chipElevation, 0.0F)
             radius = styles.getDimension(R.styleable.ChipView_chipRadius, 16.dpToPx.toFloat())
+            
+            strokeColor = styles.getColor(
+                R.styleable.ChipView_chipStrokeColor,
+                ContextCompat.getColor(context, R.color.default_chip_bg_color))
+            strokeWidth =
+                styles.getDimension(R.styleable.ChipView_chipStrokeWidth, 0.0F).roundToInt()
+            
+            bgColor =
+                styles.getColor(
+                    R.styleable.ChipView_chipBgColor,
+                    ContextCompat.getColor(context, R.color.default_chip_bg_color))
             
             setIcon(styles.getDrawable(R.styleable.ChipView_chipIcon))
             setActionIcon(styles.getDrawable(R.styleable.ChipView_chipActionIcon))
@@ -109,10 +132,6 @@ open class ChipView : LinearLayout {
     
     override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
         chipRoot?.setPadding(left, top, right, bottom)
-    }
-    
-    fun setBackgroundColorFromRes(@ColorRes color: Int) {
-        setBackgroundColor(ContextCompat.getColor(context, color))
     }
     
     fun setText(@StringRes res: Int) {
@@ -167,8 +186,12 @@ open class ChipView : LinearLayout {
         actionIconView?.setImageIcon(actionIcon)
     }
     
+    fun setBackgroundColorFromRes(@ColorRes color: Int) {
+        setBackgroundColor(ContextCompat.getColor(context, color))
+    }
+    
     override fun setBackgroundColor(@ColorInt color: Int) {
-        bgColor = ColorStateList.valueOf(color)
+        bgColor = color
     }
     
     override fun setBackgroundResource(resid: Int) {
@@ -182,6 +205,18 @@ open class ChipView : LinearLayout {
     @Suppress("OverridingDeprecatedMember")
     override fun setBackgroundDrawable(background: Drawable?) {
         throw IllegalArgumentException("Background can only be set with a color")
+    }
+    
+    private fun internalSetBackground() {
+        if (strokeWidth > 0) {
+            cardView?.background = GradientDrawable().apply {
+                shape = GradientDrawable.RECTANGLE
+                cornerRadii =
+                    floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
+                setColor(bgColor)
+                setStroke(strokeWidth, strokeColor)
+            }
+        } else cardView?.setCardBackgroundColor(bgColor)
     }
     
     override fun setElevation(elevation: Float) {
