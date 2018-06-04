@@ -136,58 +136,71 @@ open class ChipView : LinearLayout {
         chipRoot?.setPadding(left, top, right, bottom)
     }
     
+    @CallSuper
     open fun setText(@StringRes res: Int) {
         text = context.getString(res)
     }
     
+    @CallSuper
     open fun setTextColorFromRes(@ColorRes res: Int) {
         textView?.setTextColor(ContextCompat.getColor(context, res))
     }
     
+    @CallSuper
     open fun setTextColor(color: Int) {
         textView?.setTextColor(color)
     }
     
+    @CallSuper
     open fun setTextColor(colors: ColorStateList) {
         textView?.setTextColor(colors)
     }
     
+    @CallSuper
     open fun setIcon(@DrawableRes drawable: Int) {
         setIcon(ContextCompat.getDrawable(context, drawable))
     }
     
+    @CallSuper
     open fun setIcon(drawable: Drawable?) {
         iconView?.setImageDrawable(drawable)
         iconView?.visibility = if (drawable != null) View.VISIBLE else View.GONE
     }
     
+    @CallSuper
     open fun setIcon(bitmap: Bitmap?) {
         iconView?.setImageBitmap(bitmap)
     }
     
     @RequiresApi(Build.VERSION_CODES.M)
+    @CallSuper
     open fun setIcon(icon: Icon?) {
         iconView?.setImageIcon(icon)
     }
     
+    @CallSuper
     open fun setActionIcon(@DrawableRes drawable: Int) {
         setActionIcon(ContextCompat.getDrawable(context, drawable))
     }
     
+    @CallSuper
     open fun setActionIcon(drawable: Drawable?) {
         actionIconView?.setImageDrawable(drawable)
         actionIconView?.visibility = if (drawable != null) View.VISIBLE else View.GONE
     }
     
+    @CallSuper
     open fun setActionIcon(bitmap: Bitmap?) {
         actionIconView?.setImageBitmap(bitmap)
     }
     
     @RequiresApi(Build.VERSION_CODES.M)
+    @CallSuper
     open fun setActionIcon(actionIcon: Icon?) {
         actionIconView?.setImageIcon(actionIcon)
     }
     
+    @CallSuper
     open fun setBackgroundColorFromRes(@ColorRes color: Int) {
         setBackgroundColor(ContextCompat.getColor(context, color))
     }
