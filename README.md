@@ -2,7 +2,7 @@
 
 ![API](https://img.shields.io/badge/API-16%2B-34bf49.svg)
 [![JitPack](https://jitpack.io/v/jahirfiquitiva/ChipView.svg)](https://jitpack.io/#jahirfiquitiva/ChipView)
-[![Build Status](https://travis-ci.org/jahirfiquitiva/ChipView.svg?branch=master)](https://travis-ci.org/jahirfiquitiva/ChipView)
+[![Build Status](https://travis-ci.com/jahirfiquitiva/ChipView.svg?branch=master)](https://travis-ci.com/jahirfiquitiva/ChipView)
 
 Yep, another Material Chip view library. Just because the Android Support library v 28.x is still in alpha and because no other chip library has been able to provide the simplicity I need (regardless of all their features).
 
