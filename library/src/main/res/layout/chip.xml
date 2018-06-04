@@ -22,7 +22,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clipToPadding="false"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    android:animateLayoutChanges="true">
 
     <android.support.v7.widget.CardView
         android:id="@+id/chip_card"
@@ -31,6 +32,7 @@
         android:foreground="?selectableItemBackground"
         android:clipToPadding="false"
         android:clipChildren="false"
+        android:animateLayoutChanges="true"
         app:cardCornerRadius="@dimen/default_chip_radius"
         app:cardElevation="@dimen/default_chip_elevation">
 
@@ -43,6 +45,7 @@
             android:padding="4dp"
             android:clipToPadding="false"
             android:clipChildren="false"
+            android:animateLayoutChanges="true"
             tools:ignore="UseCompoundDrawables">
 
             <ImageView

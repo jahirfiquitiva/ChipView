@@ -22,6 +22,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.Icon
 import android.os.Build
+import android.support.annotation.CallSuper
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
@@ -130,78 +131,83 @@ open class ChipView : LinearLayout {
         }
     }
     
+    @CallSuper
     override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
         chipRoot?.setPadding(left, top, right, bottom)
     }
     
-    fun setText(@StringRes res: Int) {
+    open fun setText(@StringRes res: Int) {
         text = context.getString(res)
     }
     
-    fun setTextColorFromRes(@ColorRes res: Int) {
+    open fun setTextColorFromRes(@ColorRes res: Int) {
         textView?.setTextColor(ContextCompat.getColor(context, res))
     }
     
-    fun setTextColor(color: Int) {
+    open fun setTextColor(color: Int) {
         textView?.setTextColor(color)
     }
     
-    fun setTextColor(colors: ColorStateList) {
+    open fun setTextColor(colors: ColorStateList) {
         textView?.setTextColor(colors)
     }
     
-    fun setIcon(@DrawableRes drawable: Int) {
+    open fun setIcon(@DrawableRes drawable: Int) {
         setIcon(ContextCompat.getDrawable(context, drawable))
     }
     
-    fun setIcon(drawable: Drawable?) {
+    open fun setIcon(drawable: Drawable?) {
         iconView?.setImageDrawable(drawable)
         iconView?.visibility = if (drawable != null) View.VISIBLE else View.GONE
     }
     
-    fun setIcon(bitmap: Bitmap?) {
+    open fun setIcon(bitmap: Bitmap?) {
         iconView?.setImageBitmap(bitmap)
     }
     
     @RequiresApi(Build.VERSION_CODES.M)
-    fun setIcon(icon: Icon?) {
+    open fun setIcon(icon: Icon?) {
         iconView?.setImageIcon(icon)
     }
     
-    fun setActionIcon(@DrawableRes drawable: Int) {
+    open fun setActionIcon(@DrawableRes drawable: Int) {
         setActionIcon(ContextCompat.getDrawable(context, drawable))
     }
     
-    fun setActionIcon(drawable: Drawable?) {
+    open fun setActionIcon(drawable: Drawable?) {
         actionIconView?.setImageDrawable(drawable)
         actionIconView?.visibility = if (drawable != null) View.VISIBLE else View.GONE
     }
     
-    fun setActionIcon(bitmap: Bitmap?) {
+    open fun setActionIcon(bitmap: Bitmap?) {
         actionIconView?.setImageBitmap(bitmap)
     }
     
     @RequiresApi(Build.VERSION_CODES.M)
-    fun setActionIcon(actionIcon: Icon?) {
+    open fun setActionIcon(actionIcon: Icon?) {
         actionIconView?.setImageIcon(actionIcon)
     }
     
-    fun setBackgroundColorFromRes(@ColorRes color: Int) {
+    open fun setBackgroundColorFromRes(@ColorRes color: Int) {
         setBackgroundColor(ContextCompat.getColor(context, color))
     }
     
+    @CallSuper
     override fun setBackgroundColor(@ColorInt color: Int) {
         bgColor = color
     }
     
+    @CallSuper
     override fun setBackgroundResource(resid: Int) {
         throw IllegalArgumentException("Background can only be set with a color")
     }
     
+    @CallSuper
     override fun setBackground(background: Drawable?) {
         throw IllegalArgumentException("Background can only be set with a color")
     }
     
+    @CallSuper
     @Suppress("OverridingDeprecatedMember")
     override fun setBackgroundDrawable(background: Drawable?) {
         throw IllegalArgumentException("Background can only be set with a color")
@@ -219,7 +225,9 @@ open class ChipView : LinearLayout {
         } else cardView?.setCardBackgroundColor(bgColor)
     }
     
+    @CallSuper
     override fun setElevation(elevation: Float) {
+        if (strokeWidth > 0) return
         cardView?.cardElevation = elevation
         if (elevation > 0.0F) {
             val padding = (elevation * 1.5F).toInt()
@@ -227,31 +235,38 @@ open class ChipView : LinearLayout {
         } else chipRoot?.setPadding(0, 0, 0, 0)
     }
     
+    @CallSuper
     override fun getElevation(): Float {
         return cardView?.cardElevation ?: 0.0F
     }
     
+    @CallSuper
     override fun setOnClickListener(l: OnClickListener?) {
         cardView?.setOnClickListener(l)
     }
     
+    @CallSuper
     override fun setOnLongClickListener(l: OnLongClickListener?) {
         cardView?.setOnLongClickListener(l)
     }
     
-    fun setOnActionClickListener(l: OnClickListener?) {
+    @CallSuper
+    open fun setOnActionClickListener(l: OnClickListener?) {
         actionIconView?.setOnClickListener(l)
     }
     
-    fun setOnActionClickListener(l: (View) -> Unit) {
+    @CallSuper
+    open fun setOnActionClickListener(l: (View) -> Unit) {
         actionIconView?.setOnClickListener { l(it) }
     }
     
-    fun setOnActionLongClickListener(l: OnLongClickListener?) {
+    @CallSuper
+    open fun setOnActionLongClickListener(l: OnLongClickListener?) {
         actionIconView?.setOnLongClickListener(l)
     }
     
-    fun setOnActionLongClickListener(l: (View) -> Boolean) {
+    @CallSuper
+    open fun setOnActionLongClickListener(l: (View) -> Boolean) {
         actionIconView?.setOnLongClickListener { l(it) }
     }
 }
