@@ -47,14 +47,15 @@
         android:layout_height="wrap_content"
         app:chipText="I am Chip"
         app:chipActionIcon="@drawable/ic_close"
-        app:chipElevation="2dp" />
+        app:chipElevation="2dp"
+        app:chipTextSize="18sp" />
 
     <com.jahirfiquitiva.chip.ChipView
         android:id="@+id/stroke_chip"
         android:layout_margin="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:chipText="I am Chip"
+        app:chipText="I am Chip with a really long text and my text will be ellipsized"
         app:chipBgColor="#81ecec"
         app:chipStrokeWidth="1dp"
         app:chipStrokeColor="#80000000" />

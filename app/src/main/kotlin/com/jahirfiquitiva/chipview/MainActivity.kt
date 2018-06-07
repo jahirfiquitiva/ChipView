@@ -34,6 +34,10 @@ class MainActivity : AppCompatActivity() {
         findViewById<ChipView?>(R.id.action_chip)
     }
     
+    private val strokeChip: ChipView? by lazy {
+        findViewById<ChipView?>(R.id.stroke_chip)
+    }
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -44,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         
         actionChip?.setOnClickListener { showToast("You pressed the chip with action icon") }
         actionChip?.setOnActionClickListener { showToast("You pressed the action icon") }
+        
+        strokeChip?.setOnClickListener { showToast("You pressed the stroked chip") }
     }
     
     private fun showToast(text: String) {

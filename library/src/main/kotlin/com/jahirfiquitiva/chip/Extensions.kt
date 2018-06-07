@@ -16,6 +16,14 @@
 package com.jahirfiquitiva.chip
 
 import android.content.res.Resources
+import android.graphics.Color
+import android.support.annotation.ColorInt
+import android.support.annotation.FloatRange
+
+/**
+ * Created by Allan Wang
+ * Taken from his awesome library: KAU (https://github.com/AllanWang/KAU/)
+ */
 
 internal inline val Float.dpToPx: Float
     get() = this * Resources.getSystem().displayMetrics.density
@@ -23,20 +31,26 @@ internal inline val Float.dpToPx: Float
 internal inline val Int.dpToPx: Int
     get() = toFloat().dpToPx.toInt()
 
-internal inline val Float.pxToDp: Float
-    get() = this / Resources.getSystem().displayMetrics.density
+internal fun Int.isColorDark(minDarkness: Float = 0.6F): Boolean =
+    ((0.299 * Color.red(this) + 0.587 * Color.green(this) + 0.114 * Color.blue(
+        this)) / 255.0) < minDarkness
 
-internal inline val Int.pxToDp: Int
-    get() = toFloat().pxToDp.toInt()
+@ColorInt
+internal fun Int.lighten(
+    @FloatRange(from = 0.0, to = 1.0)
+    factor: Float = 0.25F
+                        ): Int {
+    val (red, green, blue) = intArrayOf(Color.red(this), Color.green(this), Color.blue(this))
+        .map { (it * (1f - factor) + 255f * factor).toInt() }
+    return Color.argb(Color.alpha(this), red, green, blue)
+}
 
-internal inline val Float.dpToSp: Float
-    get() = this * Resources.getSystem().displayMetrics.scaledDensity
-
-internal inline val Int.dpToSp: Int
-    get() = toFloat().dpToSp.toInt()
-
-internal inline val Float.spToDp: Float
-    get() = this / Resources.getSystem().displayMetrics.scaledDensity
-
-internal inline val Int.spToDp: Int
-    get() = toFloat().spToDp.toInt()
+@ColorInt
+internal fun Int.darken(
+    @FloatRange(from = 0.0, to = 1.0)
+    factor: Float = 0.25F
+                       ): Int {
+    val (red, green, blue) = intArrayOf(Color.red(this), Color.green(this), Color.blue(this))
+        .map { (it * (1f - factor)).toInt() }
+    return Color.argb(Color.alpha(this), red, green, blue)
+}

@@ -19,6 +19,7 @@
         <attr name="chipBgColor" format="color|reference" />
         <attr name="chipText" format="string|reference" />
         <attr name="chipTextColor" format="color|reference" />
+        <attr name="chipTextSize" format="dimension|reference" />
         <attr name="chipElevation" format="dimension|reference" />
         <attr name="chipRadius" format="dimension|reference" />
         <attr name="chipIcon" format="reference" />

@@ -18,9 +18,12 @@ package com.jahirfiquitiva.chip
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.Icon
+import android.graphics.drawable.RippleDrawable
 import android.os.Build
 import android.support.annotation.CallSuper
 import android.support.annotation.ColorInt
@@ -31,6 +34,7 @@ import android.support.annotation.StringRes
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.CardView
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -53,6 +57,12 @@ open class ChipView : LinearLayout {
             textView?.text = value
         }
     
+    var textSize: Float
+        get() = textView?.textSize ?: 0.0F
+        set(value) {
+            textView?.textSize = value
+        }
+    
     var radius: Float
         get() = cardView?.radius ?: 0.0F
         set(value) {
@@ -60,8 +70,8 @@ open class ChipView : LinearLayout {
         }
     
     @ColorInt
-    var bgColor: Int = 0
-        private set(value) {
+    private var bgColor: Int = 0
+        set(value) {
             field = value
             internalSetBackground()
         }
@@ -104,6 +114,11 @@ open class ChipView : LinearLayout {
         val styles = context.obtainStyledAttributes(attrs, R.styleable.ChipView, 0, 0)
         try {
             text = styles.getString(R.styleable.ChipView_chipText) ?: ""
+            
+            val txtSize = styles.getDimensionPixelSize(R.styleable.ChipView_chipTextSize, 0)
+            if (txtSize > 0)
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, txtSize.toFloat())
+            
             setTextColor(
                 styles.getColor(
                     R.styleable.ChipView_chipTextColor,
@@ -157,6 +172,12 @@ open class ChipView : LinearLayout {
     }
     
     @CallSuper
+    open fun setTextSize(unit: Int, size: Float) {
+        textSize = size
+        textView?.setTextSize(unit, size)
+    }
+    
+    @CallSuper
     open fun setIcon(@DrawableRes drawable: Int) {
         setIcon(ContextCompat.getDrawable(context, drawable))
     }
@@ -200,6 +221,17 @@ open class ChipView : LinearLayout {
         actionIconView?.setImageIcon(actionIcon)
     }
     
+    override fun getBackground(): Drawable? = cardView?.background
+    
+    @ColorInt
+    fun getBackgroundColor(): Int = bgColor
+    
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    override fun getBackgroundTintList(): ColorStateList? = cardView?.backgroundTintList
+    
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    override fun getBackgroundTintMode(): PorterDuff.Mode? = cardView?.backgroundTintMode
+    
     @CallSuper
     open fun setBackgroundColorFromRes(@ColorRes color: Int) {
         setBackgroundColor(ContextCompat.getColor(context, color))
@@ -227,15 +259,43 @@ open class ChipView : LinearLayout {
     }
     
     private fun internalSetBackground() {
-        if (strokeWidth > 0) {
-            cardView?.background = GradientDrawable().apply {
+        val fgResId: Int = try {
+            val attrs = intArrayOf(R.attr.selectableItemBackground)
+            val typedArray = context.obtainStyledAttributes(attrs)
+            val fgRes = typedArray?.getResourceId(0, 0) ?: 0
+            typedArray?.recycle()
+            fgRes
+        } catch (ignored: Exception) {
+            0
+        }
+        
+        val bgDrawable: Drawable? = if (strokeWidth > 0) {
+            GradientDrawable().apply {
                 shape = GradientDrawable.RECTANGLE
                 cornerRadii =
                     floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
                 setColor(bgColor)
                 setStroke(strokeWidth, strokeColor)
             }
-        } else cardView?.setCardBackgroundColor(bgColor)
+        } else cardView?.background
+        
+        @ColorInt
+        val fgColor: Int = if (bgColor.isColorDark()) bgColor.lighten() else bgColor.darken()
+        
+        val fgDrawable: Drawable? = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ->
+                RippleDrawable(ColorStateList.valueOf(fgColor), null, bgDrawable)
+            fgResId != 0 -> ContextCompat.getDrawable(context, fgResId)
+            else -> null
+        }
+        
+        if (strokeWidth > 0) {
+            cardView?.setCardBackgroundColor(Color.TRANSPARENT)
+            cardView?.background = bgDrawable
+        } else {
+            cardView?.setCardBackgroundColor(bgColor)
+        }
+        cardView?.foreground = fgDrawable
     }
     
     @CallSuper
