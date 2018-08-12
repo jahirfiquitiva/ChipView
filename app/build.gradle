@@ -35,12 +35,12 @@ android {
         }
     }
 
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "com.jahirfiquitiva.chipview"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode rootProject.ext.version
         versionName rootProject.ext.versionName
         vectorDrawables.useSupportLibrary = true
@@ -61,5 +61,5 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':library')
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.41'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.60'
 }
