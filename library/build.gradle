@@ -17,7 +17,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     lintOptions {
         abortOnError false
@@ -35,7 +35,7 @@ android {
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode rootProject.ext.version
         versionName rootProject.ext.versionName
     }
@@ -65,7 +65,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.41'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.60'
     api 'com.android.support:appcompat-v7:27.1.1'
     api 'com.android.support:cardview-v7:27.1.1'
 }
