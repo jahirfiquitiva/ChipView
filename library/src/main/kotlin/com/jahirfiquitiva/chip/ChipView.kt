@@ -25,14 +25,6 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.Icon
 import android.graphics.drawable.RippleDrawable
 import android.os.Build
-import android.support.annotation.CallSuper
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
-import android.support.annotation.RequiresApi
-import android.support.annotation.StringRes
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.CardView
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -40,6 +32,14 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.CallSuper
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import kotlin.math.roundToInt
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")

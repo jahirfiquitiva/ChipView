@@ -27,7 +27,7 @@
     android:gravity="center"
     android:animateLayoutChanges="true">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/chip_card"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/default_chip_height"
@@ -97,6 +97,6 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
