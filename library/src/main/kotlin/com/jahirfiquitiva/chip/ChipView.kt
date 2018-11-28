@@ -27,6 +27,7 @@ import android.graphics.drawable.Icon
 import android.graphics.drawable.RippleDrawable
 import android.os.Build
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -354,6 +355,13 @@ open class ChipView : LinearLayout {
     }
     
     private fun makeActionIconClickable() {
+        try {
+            val outValue = TypedValue()
+            context.theme.resolveAttribute(android.R.attr.actionBarItemBackground, outValue, true)
+            actionIconView?.setBackgroundResource(outValue.resourceId)
+        } catch (e: Exception) {
+            Log.e("ChipView", e.message)
+        }
         actionIconView?.isClickable = true
         actionIconView?.isFocusable = true
     }
