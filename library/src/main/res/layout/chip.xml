@@ -91,6 +91,8 @@
                 android:gravity="center_vertical"
                 android:background="?actionBarItemBackground"
                 android:visibility="gone"
+                android:focusable="false"
+                android:clickable="false"
                 tools:ignore="ContentDescription" />
 
         </LinearLayout>

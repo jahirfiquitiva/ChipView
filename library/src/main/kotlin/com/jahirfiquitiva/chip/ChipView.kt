@@ -353,23 +353,32 @@ open class ChipView : LinearLayout {
         cardView?.setOnLongClickListener(l)
     }
     
+    private fun makeActionIconClickable() {
+        actionIconView?.isClickable = true
+        actionIconView?.isFocusable = true
+    }
+    
     @CallSuper
     open fun setOnActionClickListener(l: OnClickListener?) {
+        makeActionIconClickable()
         actionIconView?.setOnClickListener(l)
     }
     
     @CallSuper
     open fun setOnActionClickListener(l: (View) -> Unit) {
+        makeActionIconClickable()
         actionIconView?.setOnClickListener { l(it) }
     }
     
     @CallSuper
     open fun setOnActionLongClickListener(l: OnLongClickListener?) {
+        makeActionIconClickable()
         actionIconView?.setOnLongClickListener(l)
     }
     
     @CallSuper
     open fun setOnActionLongClickListener(l: (View) -> Boolean) {
+        makeActionIconClickable()
         actionIconView?.setOnLongClickListener { l(it) }
     }
 }
