@@ -20,6 +20,7 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.Icon
@@ -38,6 +39,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
+import androidx.annotation.StyleRes
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import kotlin.math.roundToInt
@@ -175,6 +177,21 @@ open class ChipView : LinearLayout {
     open fun setTextSize(unit: Int, size: Float) {
         textSize = size
         textView?.setTextSize(unit, size)
+    }
+    
+    @CallSuper
+    open fun setTextTypeface(tf: Typeface? = textView?.typeface, style: Int = Typeface.NORMAL) {
+        textView?.setTypeface(tf, style)
+    }
+    
+    @Suppress("DEPRECATION")
+    @CallSuper
+    open fun setTextAppearance(@StyleRes style: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            textView?.setTextAppearance(style)
+        } else {
+            textView?.setTextAppearance(context, style)
+        }
     }
     
     @CallSuper
