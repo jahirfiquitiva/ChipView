@@ -38,7 +38,7 @@ internal fun Int.isColorDark(minDarkness: Float = 0.6F): Boolean =
 @ColorInt
 internal fun Int.lighten(
     @FloatRange(from = 0.0, to = 1.0)
-    factor: Float = 0.25F
+    factor: Float = 0.2F
                         ): Int {
     val (red, green, blue) = intArrayOf(Color.red(this), Color.green(this), Color.blue(this))
         .map { (it * (1f - factor) + 255f * factor).toInt() }
@@ -48,7 +48,7 @@ internal fun Int.lighten(
 @ColorInt
 internal fun Int.darken(
     @FloatRange(from = 0.0, to = 1.0)
-    factor: Float = 0.25F
+    factor: Float = 0.2F
                        ): Int {
     val (red, green, blue) = intArrayOf(Color.red(this), Color.green(this), Color.blue(this))
         .map { (it * (1f - factor)).toInt() }

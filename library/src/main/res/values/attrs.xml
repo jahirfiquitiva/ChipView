@@ -17,6 +17,7 @@
 <resources>
     <declare-styleable name="ChipView">
         <attr name="chipBgColor" format="color|reference" />
+        <attr name="chipRippleColor" format="color|reference" />
         <attr name="chipText" format="string|reference" />
         <attr name="chipTextColor" format="color|reference" />
         <attr name="chipTextSize" format="dimension|reference" />

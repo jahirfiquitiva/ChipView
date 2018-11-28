@@ -78,6 +78,13 @@ open class ChipView : LinearLayout {
             internalSetBackground()
         }
     
+    @ColorInt
+    var rippleColor: Int = 0
+        set(value) {
+            field = value
+            internalSetBackground()
+        }
+    
     var strokeWidth: Int = 0
         set(value) {
             field = value
@@ -138,6 +145,8 @@ open class ChipView : LinearLayout {
                 styles.getColor(
                     R.styleable.ChipView_chipBgColor,
                     ContextCompat.getColor(context, R.color.default_chip_bg_color))
+            
+            bgColor = styles.getColor(R.styleable.ChipView_chipRippleColor, 0)
             
             setIcon(styles.getDrawable(R.styleable.ChipView_chipIcon))
             setActionIcon(styles.getDrawable(R.styleable.ChipView_chipActionIcon))
@@ -297,7 +306,11 @@ open class ChipView : LinearLayout {
         } else cardView?.background
         
         @ColorInt
-        val fgColor: Int = if (bgColor.isColorDark()) bgColor.lighten() else bgColor.darken()
+        val fgColor: Int = if (rippleColor == 0) {
+            if (bgColor.isColorDark()) bgColor.lighten() else bgColor.darken()
+        } else {
+            rippleColor
+        }
         
         val fgDrawable: Drawable? = when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ->
