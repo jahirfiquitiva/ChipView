@@ -19,7 +19,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
@@ -29,10 +28,9 @@ import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
-import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.CallSuper
 import androidx.annotation.ColorInt
@@ -46,10 +44,18 @@ import androidx.core.content.ContextCompat
 import kotlin.math.roundToInt
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-open class ChipView : LinearLayout {
+open class ChipView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    @StyleRes defStyle: Int = 0
+                                             ) : CardView(context, attrs, defStyle) {
     
-    private var chipRoot: LinearLayout? = null
-    private var cardView: CardView? = null
+    private var internalCustomRadius = -1F
+        set(value) {
+            field = value
+            requestLayout()
+        }
+    
     private var textView: TextView? = null
     private var iconView: ImageView? = null
     private var actionIconView: ImageView? = null
@@ -64,12 +70,6 @@ open class ChipView : LinearLayout {
         get() = textView?.textSize ?: 0.0F
         set(value) {
             textView?.textSize = value
-        }
-    
-    var radius: Float
-        get() = cardView?.radius ?: 0.0F
-        set(value) {
-            cardView?.radius = value
         }
     
     @ColorInt
@@ -93,30 +93,19 @@ open class ChipView : LinearLayout {
         }
     
     @ColorInt
-    var strokeColor: Int = cardView?.cardBackgroundColor?.defaultColor ?: 0
+    var strokeColor: Int = cardBackgroundColor.defaultColor
         set(value) {
             field = value
             internalSetBackground()
         }
     
-    constructor(context: Context) : super(context) {
-        init(context, null)
+    init {
+        initChip(context, attrs)
     }
     
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        init(context, attrs)
-    }
-    
-    constructor(context: Context, attrs: AttributeSet?, style: Int) : super(context, attrs, style) {
-        init(context, attrs)
-    }
-    
-    private fun init(context: Context, attrs: AttributeSet?) {
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as? LayoutInflater
-        inflater?.inflate(R.layout.chip, this)
+    private fun initChip(context: Context, attrs: AttributeSet?) {
+        View.inflate(context, R.layout.chip, this)
         
-        this.chipRoot = findViewById(R.id.chip_root)
-        this.cardView = findViewById(R.id.chip_card)
         this.textView = findViewById(R.id.chip_text)
         this.iconView = findViewById(R.id.chip_icon)
         this.actionIconView = findViewById(R.id.chip_action_icon)
@@ -133,8 +122,6 @@ open class ChipView : LinearLayout {
                 styles.getColor(
                     R.styleable.ChipView_chipTextColor,
                     ContextCompat.getColor(context, R.color.default_chip_text_color)))
-            elevation = styles.getDimension(R.styleable.ChipView_chipElevation, 0.0F)
-            radius = styles.getDimension(R.styleable.ChipView_chipRadius, 16.dpToPx.toFloat())
             
             strokeColor = styles.getColor(
                 R.styleable.ChipView_chipStrokeColor,
@@ -147,10 +134,13 @@ open class ChipView : LinearLayout {
                     R.styleable.ChipView_chipBgColor,
                     ContextCompat.getColor(context, R.color.default_chip_bg_color))
             
-            bgColor = styles.getColor(R.styleable.ChipView_chipRippleColor, 0)
+            rippleColor = styles.getColor(R.styleable.ChipView_chipRippleColor, 0)
             
             setIcon(styles.getDrawable(R.styleable.ChipView_chipIcon))
             setActionIcon(styles.getDrawable(R.styleable.ChipView_chipActionIcon))
+            
+            super.setRadius(0F)
+            radius = styles.getDimension(R.styleable.ChipView_chipRadius, -1F)
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
@@ -159,8 +149,35 @@ open class ChipView : LinearLayout {
     }
     
     @CallSuper
-    override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
-        cardView?.setPadding(left, top, right, bottom)
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        val canModifyWidth =
+            layoutParams.width != ViewGroup.LayoutParams.MATCH_PARENT &&
+                layoutParams.height != ViewGroup.LayoutParams.MATCH_PARENT
+        if (canModifyWidth) {
+            val minHeight = if (minimumHeight <= 0) 32.dpToPx else minimumHeight
+            val properHeight = if (measuredHeight < minHeight) minHeight else measuredHeight
+            val minWidth =
+                if (minimumWidth <= 0) (measuredHeight * 1.25F).roundToInt() else minimumWidth
+            val properWidth = if (measuredWidth < minWidth) minWidth else measuredWidth
+            setMeasuredDimension(properWidth, properHeight)
+        }
+    }
+    
+    @CallSuper
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        super.setRadius(
+            if (internalCustomRadius < 0F) measuredHeight / 2.0F else internalCustomRadius)
+    }
+    
+    @CallSuper
+    override fun setRadius(radius: Float) {
+        internalCustomRadius = radius
+    }
+    
+    override fun getRadius(): Float {
+        return if (internalCustomRadius < 0F) super.getRadius() else internalCustomRadius
     }
     
     @CallSuper
@@ -248,16 +265,10 @@ open class ChipView : LinearLayout {
         actionIconView?.setImageIcon(actionIcon)
     }
     
-    override fun getBackground(): Drawable? = cardView?.background
-    
     @ColorInt
     fun getBackgroundColor(): Int = bgColor
     
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun getBackgroundTintList(): ColorStateList? = cardView?.backgroundTintList
-    
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun getBackgroundTintMode(): PorterDuff.Mode? = cardView?.backgroundTintMode
+    override fun getCardBackgroundColor(): ColorStateList = ColorStateList.valueOf(bgColor)
     
     @CallSuper
     open fun setBackgroundColorFromRes(@ColorRes color: Int) {
@@ -267,22 +278,6 @@ open class ChipView : LinearLayout {
     @CallSuper
     override fun setBackgroundColor(@ColorInt color: Int) {
         bgColor = color
-    }
-    
-    @CallSuper
-    override fun setBackgroundResource(resid: Int) {
-        throw IllegalArgumentException("Background can only be set with a color")
-    }
-    
-    @CallSuper
-    override fun setBackground(background: Drawable?) {
-        throw IllegalArgumentException("Background can only be set with a color")
-    }
-    
-    @CallSuper
-    @Suppress("OverridingDeprecatedMember")
-    override fun setBackgroundDrawable(background: Drawable?) {
-        throw IllegalArgumentException("Background can only be set with a color")
     }
     
     private fun internalSetBackground() {
@@ -304,7 +299,7 @@ open class ChipView : LinearLayout {
                 setColor(bgColor)
                 setStroke(strokeWidth, strokeColor)
             }
-        } else cardView?.background
+        } else background
         
         @ColorInt
         val fgColor: Int = if (rippleColor == 0) {
@@ -321,37 +316,12 @@ open class ChipView : LinearLayout {
         }
         
         if (strokeWidth > 0) {
-            cardView?.setCardBackgroundColor(Color.TRANSPARENT)
-            cardView?.background = bgDrawable
+            setCardBackgroundColor(Color.parseColor("#00000000"))
+            background = bgDrawable
         } else {
-            cardView?.setCardBackgroundColor(bgColor)
+            setCardBackgroundColor(bgColor)
         }
-        cardView?.foreground = fgDrawable
-    }
-    
-    @CallSuper
-    override fun setElevation(elevation: Float) {
-        if (strokeWidth > 0) return
-        cardView?.cardElevation = elevation
-        if (elevation > 0.0F) {
-            val padding = (elevation * 1.5F).toInt()
-            chipRoot?.setPadding(padding, padding, padding, padding)
-        } else chipRoot?.setPadding(0, 0, 0, 0)
-    }
-    
-    @CallSuper
-    override fun getElevation(): Float {
-        return cardView?.cardElevation ?: 0.0F
-    }
-    
-    @CallSuper
-    override fun setOnClickListener(l: OnClickListener?) {
-        cardView?.setOnClickListener(l)
-    }
-    
-    @CallSuper
-    override fun setOnLongClickListener(l: OnLongClickListener?) {
-        cardView?.setOnLongClickListener(l)
+        foreground = fgDrawable
     }
     
     private fun makeActionIconClickable() {

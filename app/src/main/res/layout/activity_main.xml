@@ -24,17 +24,17 @@
 
     <com.jahirfiquitiva.chip.ChipView
         android:id="@+id/chip"
-        android:layout_margin="4dp"
+        android:layout_margin="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:chipText="I am Chip" />
 
     <com.jahirfiquitiva.chip.ChipView
         android:id="@+id/icon_chip"
-        android:layout_margin="4dp"
+        android:layout_margin="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:chipRadius="4dp"
+        app:cardCornerRadius="4dp"
         app:chipBgColor="#625"
         app:chipTextColor="#fff"
         app:chipText="I am Chip"
@@ -42,20 +42,20 @@
 
     <com.jahirfiquitiva.chip.ChipView
         android:id="@+id/action_chip"
-        android:layout_margin="4dp"
+        android:layout_margin="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:chipText="I am Chip"
         app:chipActionIcon="@drawable/ic_close"
-        app:chipElevation="2dp"
+        app:cardElevation="2dp"
         app:chipTextSize="18sp" />
 
     <com.jahirfiquitiva.chip.ChipView
         android:id="@+id/stroke_chip"
-        android:layout_margin="4dp"
+        android:layout_margin="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:chipText="I am Chip with a really long text and my text will be ellipsized"
+        app:chipText="I am Chip with a really long text and my text will be ellipsized eventually as it reaches the width of the screen"
         app:chipBgColor="@color/colorAccent"
         app:chipStrokeWidth="1dp"
         app:chipStrokeColor="#80000000" />
@@ -65,8 +65,19 @@
         android:layout_margin="16dp"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
-        app:chipText="Hello"
-        app:chipBgColor="#81ecec"
-        app:chipElevation="6dp" />
+        android:minWidth="120dp"
+        app:chipIcon="@drawable/ic_palette"
+        app:chipText="FAB?"
+        app:chipBgColor="@color/colorAccent"
+        app:chipTextColor="#fff"
+        app:cardElevation="6dp" />
+
+    <com.jahirfiquitiva.chip.ChipView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardElevation="6dp"
+        app:chipBgColor="#fff"
+        app:chipText="Centered" />
 
 </LinearLayout>

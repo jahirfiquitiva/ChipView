@@ -14,92 +14,79 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<LinearLayout
+<merge
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/chip_root"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chip_card"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:minHeight="@dimen/default_chip_height"
+    android:foreground="?selectableItemBackground"
     android:clipToPadding="false"
     android:clipChildren="false"
+    android:animateLayoutChanges="true"
     android:layout_gravity="center"
     android:gravity="center"
-    android:animateLayoutChanges="true"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    app:cardElevation="@dimen/default_chip_elevation"
+    tools:parentTag="androidx.cardview.widget.CardView">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/chip_card"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/default_chip_height"
-        android:foreground="?selectableItemBackground"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="4dp"
         android:clipToPadding="false"
         android:clipChildren="false"
         android:animateLayoutChanges="true"
-        android:layout_gravity="center"
-        android:gravity="center"
         android:descendantFocusability="blocksDescendants"
-        app:cardCornerRadius="@dimen/default_chip_radius"
-        app:cardElevation="@dimen/default_chip_elevation">
+        tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/chip_icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:padding="4dp"
-            android:clipToPadding="false"
-            android:clipChildren="false"
-            android:animateLayoutChanges="true"
-            android:descendantFocusability="blocksDescendants"
-            tools:ignore="UseCompoundDrawables">
+            android:maxHeight="@dimen/default_chip_height"
+            android:layout_marginLeft="@dimen/default_chip_icon_horizontal_margin"
+            android:layout_marginStart="@dimen/default_chip_icon_horizontal_margin"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:focusable="false"
+            android:clickable="false"
+            tools:ignore="ContentDescription" />
 
-            <ImageView
-                android:id="@+id/chip_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxHeight="@dimen/default_chip_height"
-                android:layout_marginLeft="@dimen/default_chip_icon_horizontal_margin"
-                android:layout_marginStart="@dimen/default_chip_icon_horizontal_margin"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:visibility="gone"
-                android:focusable="false"
-                android:clickable="false"
-                tools:ignore="ContentDescription" />
+        <TextView
+            android:id="@+id/chip_text"
+            android:layout_marginLeft="@dimen/default_chip_text_horizontal_margin"
+            android:layout_marginRight="@dimen/default_chip_text_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/default_chip_text_size"
+            android:focusable="false"
+            android:clickable="false" />
 
-            <TextView
-                android:id="@+id/chip_text"
-                android:layout_marginLeft="@dimen/default_chip_text_horizontal_margin"
-                android:layout_marginRight="@dimen/default_chip_text_horizontal_margin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textSize="@dimen/default_chip_text_size"
-                android:focusable="false"
-                android:clickable="false" />
+        <ImageView
+            android:id="@+id/chip_action_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="@dimen/default_chip_height"
+            android:layout_marginEnd="@dimen/default_chip_icon_horizontal_margin"
+            android:layout_marginRight="@dimen/default_chip_icon_horizontal_margin"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:focusable="false"
+            android:clickable="false"
+            tools:ignore="ContentDescription" />
 
-            <ImageView
-                android:id="@+id/chip_action_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxHeight="@dimen/default_chip_height"
-                android:layout_marginEnd="@dimen/default_chip_icon_horizontal_margin"
-                android:layout_marginRight="@dimen/default_chip_icon_horizontal_margin"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:visibility="gone"
-                android:focusable="false"
-                android:clickable="false"
-                tools:ignore="ContentDescription" />
+    </LinearLayout>
 
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
+</merge>
