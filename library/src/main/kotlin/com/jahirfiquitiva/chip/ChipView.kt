@@ -112,8 +112,8 @@ open class ChipView : LinearLayout {
     }
     
     private fun init(context: Context, attrs: AttributeSet?) {
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.chip, this)
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as? LayoutInflater
+        inflater?.inflate(R.layout.chip, this)
         
         this.chipRoot = findViewById(R.id.chip_root)
         this.cardView = findViewById(R.id.chip_card)
@@ -160,7 +160,7 @@ open class ChipView : LinearLayout {
     
     @CallSuper
     override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
-        chipRoot?.setPadding(left, top, right, bottom)
+        cardView?.setPadding(left, top, right, bottom)
     }
     
     @CallSuper

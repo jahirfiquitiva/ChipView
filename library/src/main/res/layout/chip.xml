@@ -31,7 +31,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/chip_card"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/default_chip_height"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/default_chip_height"
         android:foreground="?selectableItemBackground"
         android:clipToPadding="false"
         android:clipChildren="false"
