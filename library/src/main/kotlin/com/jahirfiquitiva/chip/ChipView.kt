@@ -294,6 +294,11 @@ open class ChipView @JvmOverloads constructor(
         contentLayout?.setBackgroundResource(resId)
     }
     
+    @CallSuper
+    override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
+        contentLayout?.setPadding(left, top, right, bottom)
+    }
+    
     private fun internalSetBackground() {
         val fgResId: Int = try {
             val attrs = intArrayOf(R.attr.selectableItemBackground)
