@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         strokeChip?.setOnClickListener { showToast("You pressed the stroked chip") }
         
         fabChip?.setOnClickListener { showToast("Am I even a FAB?") }
+        fabChip?.setBackgroundResource(R.drawable.gradient)
     }
     
     private fun showToast(text: String) {

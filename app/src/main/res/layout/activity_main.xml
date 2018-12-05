@@ -27,14 +27,15 @@
         android:layout_margin="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:chipText="I am Chip" />
+        app:chipText="I am Chip"
+        app:cardElevation="0dp" />
 
     <com.jahirfiquitiva.chip.ChipView
         android:id="@+id/icon_chip"
         android:layout_margin="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="4dp"
+        app:chipRadius="8dp"
         app:chipBgColor="#625"
         app:chipTextColor="#fff"
         app:chipText="I am Chip"
@@ -55,8 +56,8 @@
         android:layout_margin="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:chipText="I am Chip with a really long text and my text will be ellipsized eventually as it reaches the width of the screen"
-        app:chipBgColor="@color/colorAccent"
+        app:chipText="I am Chip with a really long text and my text will be ellipsized eventually as it reaches the width of the screen. Even in horizontal mode, this view will still be ellipsize because of how long its text is."
+        app:chipBgColor="#8ff"
         app:chipStrokeWidth="1dp"
         app:chipStrokeColor="#80000000" />
 
@@ -64,11 +65,11 @@
         android:id="@+id/fab_chip"
         android:layout_margin="16dp"
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:minWidth="120dp"
+        android:background="@drawable/gradient"
         app:chipIcon="@drawable/ic_palette"
         app:chipText="FAB?"
-        app:chipBgColor="@color/colorAccent"
         app:chipTextColor="#fff"
         app:cardElevation="6dp" />
 

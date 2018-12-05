@@ -23,18 +23,22 @@
     android:layout_height="wrap_content"
     android:minHeight="@dimen/default_chip_height"
     android:foreground="?selectableItemBackground"
-    android:clipToPadding="false"
-    android:clipChildren="false"
     android:animateLayoutChanges="true"
     android:layout_gravity="center"
     android:gravity="center"
     android:descendantFocusability="blocksDescendants"
     app:cardElevation="@dimen/default_chip_elevation"
+    app:contentPadding="0dp"
+    app:contentPaddingTop="0dp"
+    app:contentPaddingBottom="0dp"
+    app:contentPaddingLeft="0dp"
+    app:contentPaddingRight="0dp"
     tools:parentTag="androidx.cardview.widget.CardView">
 
     <LinearLayout
+        android:id="@+id/chip_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
@@ -48,7 +52,7 @@
         <ImageView
             android:id="@+id/chip_icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:maxHeight="@dimen/default_chip_height"
             android:layout_marginLeft="@dimen/default_chip_icon_horizontal_margin"
             android:layout_marginStart="@dimen/default_chip_icon_horizontal_margin"
@@ -61,10 +65,10 @@
 
         <TextView
             android:id="@+id/chip_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/default_chip_text_horizontal_margin"
             android:layout_marginRight="@dimen/default_chip_text_horizontal_margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
             android:maxLines="1"
@@ -76,7 +80,7 @@
         <ImageView
             android:id="@+id/chip_action_icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:maxHeight="@dimen/default_chip_height"
             android:layout_marginEnd="@dimen/default_chip_icon_horizontal_margin"
             android:layout_marginRight="@dimen/default_chip_icon_horizontal_margin"

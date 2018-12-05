@@ -14,12 +14,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
-    <dimen name="default_chip_height">32dp</dimen>
-    <dimen name="default_chip_width">72dp</dimen>
-    <dimen name="default_chip_radius">16dp</dimen>
-    <dimen name="default_chip_elevation">0dp</dimen>
-    <dimen name="default_chip_text_size">14sp</dimen>
-    <dimen name="default_chip_text_horizontal_margin">8dp</dimen>
-    <dimen name="default_chip_icon_horizontal_margin">2dp</dimen>
-</resources>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="90"
+        android:startColor="#45aaf2"
+        android:endColor="#2d98da" />
+</shape>

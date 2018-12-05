@@ -50,15 +50,16 @@ open class ChipView @JvmOverloads constructor(
     @StyleRes defStyle: Int = 0
                                              ) : CardView(context, attrs, defStyle) {
     
+    private var contentLayout: View? = null
+    private var textView: TextView? = null
+    private var iconView: ImageView? = null
+    private var actionIconView: ImageView? = null
+    
     private var internalCustomRadius = -1F
         set(value) {
             field = value
             requestLayout()
         }
-    
-    private var textView: TextView? = null
-    private var iconView: ImageView? = null
-    private var actionIconView: ImageView? = null
     
     var text: String
         get() = textView?.text.toString()
@@ -104,11 +105,12 @@ open class ChipView @JvmOverloads constructor(
     }
     
     private fun initChip(context: Context, attrs: AttributeSet?) {
-        View.inflate(context, R.layout.chip, this)
+        View.inflate(context, R.layout.chip, parent as? ViewGroup ?: this)
         
-        this.textView = findViewById(R.id.chip_text)
-        this.iconView = findViewById(R.id.chip_icon)
-        this.actionIconView = findViewById(R.id.chip_action_icon)
+        contentLayout = findViewById(R.id.chip_content)
+        textView = findViewById(R.id.chip_text)
+        iconView = findViewById(R.id.chip_icon)
+        actionIconView = findViewById(R.id.chip_action_icon)
         
         val styles = context.obtainStyledAttributes(attrs, R.styleable.ChipView, 0, 0)
         try {
@@ -151,16 +153,19 @@ open class ChipView @JvmOverloads constructor(
     @CallSuper
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        val canModifyWidth =
+        val canModifyDimensions =
             layoutParams.width != ViewGroup.LayoutParams.MATCH_PARENT &&
                 layoutParams.height != ViewGroup.LayoutParams.MATCH_PARENT
-        if (canModifyWidth) {
+        if (canModifyDimensions) {
             val minHeight = if (minimumHeight <= 0) 32.dpToPx else minimumHeight
             val properHeight = if (measuredHeight < minHeight) minHeight else measuredHeight
             val minWidth =
                 if (minimumWidth <= 0) (measuredHeight * 1.25F).roundToInt() else minimumWidth
             val properWidth = if (measuredWidth < minWidth) minWidth else measuredWidth
             setMeasuredDimension(properWidth, properHeight)
+            if (radius < 0F) radius = (properHeight / 2.0F)
+            contentLayout?.minimumWidth = properWidth
+            contentLayout?.minimumHeight = properHeight
         }
     }
     
@@ -174,11 +179,10 @@ open class ChipView @JvmOverloads constructor(
     @CallSuper
     override fun setRadius(radius: Float) {
         internalCustomRadius = radius
+        if (strokeWidth > 0) internalSetBackground()
     }
     
-    override fun getRadius(): Float {
-        return if (internalCustomRadius < 0F) super.getRadius() else internalCustomRadius
-    }
+    override fun getRadius(): Float = internalCustomRadius
     
     @CallSuper
     open fun setText(@StringRes res: Int) {
@@ -280,6 +284,16 @@ open class ChipView @JvmOverloads constructor(
         bgColor = color
     }
     
+    @CallSuper
+    override fun setBackground(background: Drawable?) {
+        contentLayout?.background = background
+    }
+    
+    @CallSuper
+    override fun setBackgroundResource(resId: Int) {
+        contentLayout?.setBackgroundResource(resId)
+    }
+    
     private fun internalSetBackground() {
         val fgResId: Int = try {
             val attrs = intArrayOf(R.attr.selectableItemBackground)
@@ -316,10 +330,10 @@ open class ChipView @JvmOverloads constructor(
         }
         
         if (strokeWidth > 0) {
-            setCardBackgroundColor(Color.parseColor("#00000000"))
-            background = bgDrawable
+            super.setCardBackgroundColor(Color.parseColor("#00000000"))
+            super.setBackground(bgDrawable)
         } else {
-            setCardBackgroundColor(bgColor)
+            super.setCardBackgroundColor(bgColor)
         }
         foreground = fgDrawable
     }
