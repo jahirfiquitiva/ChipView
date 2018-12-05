@@ -4,7 +4,7 @@
 [![JitPack](https://jitpack.io/v/jahirfiquitiva/ChipView.svg)](https://jitpack.io/#jahirfiquitiva/ChipView)
 [![Build Status](https://travis-ci.com/jahirfiquitiva/ChipView.svg?branch=master)](https://travis-ci.com/jahirfiquitiva/ChipView)
 
-Yep, another Material Chip view library. Just because the Android Support library v 28.x is still in alpha and because no other chip library has been able to provide the simplicity I need (regardless of all their features).
+Yep, another Material Design Chip view library. Just because no other chip library has been able to provide the simplicity I need (regardless of all their features).
 
 You can download a [sample app here](http://j.mp/ChipViewSample).
 
@@ -32,7 +32,7 @@ allprojects {
 2. Add the dependency in your project `build.gradle` file
 ```gradle
 dependencies {
-    compile('com.jahirfiquitiva:ChipView:{latest version}@aar') {
+    implementation('com.jahirfiquitiva:ChipView:{latest version}@aar') {
         transitive = true
     }
 }
@@ -41,7 +41,7 @@ where `{latest version}` corresponds to published version in   [![JitPack](https
 
 
 ## How to implement
-:page_with_curl: You can check the **[sample App](https://github.com/jahirfiquitiva/ChipView/tree/master/app/)** for details
+:page_with_curl: You can check the **[sample App](https://github.com/jahirfiquitiva/ChipView/tree/master/app/src/main)** for details
 
 ---
 
