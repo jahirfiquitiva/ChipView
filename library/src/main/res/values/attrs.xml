@@ -26,5 +26,6 @@
         <attr name="chipActionIcon" format="reference" />
         <attr name="chipStrokeWidth" format="dimension|reference" />
         <attr name="chipStrokeColor" format="color|reference" />
+        <attr name="chipContentFillsChip" format="boolean|reference" />
     </declare-styleable>
 </resources>

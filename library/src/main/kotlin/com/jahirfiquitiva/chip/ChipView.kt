@@ -55,6 +55,8 @@ open class ChipView @JvmOverloads constructor(
     private var iconView: ImageView? = null
     private var actionIconView: ImageView? = null
     
+    private var contentFillsChip: Boolean = false
+    
     private var internalCustomRadius = -1F
         set(value) {
             field = value
@@ -116,6 +118,8 @@ open class ChipView @JvmOverloads constructor(
         try {
             text = styles.getString(R.styleable.ChipView_chipText) ?: ""
             
+            contentFillsChip = styles.getBoolean(R.styleable.ChipView_chipContentFillsChip, false)
+            
             val txtSize = styles.getDimensionPixelSize(R.styleable.ChipView_chipTextSize, 0)
             if (txtSize > 0)
                 setTextSize(TypedValue.COMPLEX_UNIT_PX, txtSize.toFloat())
@@ -164,8 +168,10 @@ open class ChipView @JvmOverloads constructor(
             val properWidth = if (measuredWidth < minWidth) minWidth else measuredWidth
             setMeasuredDimension(properWidth, properHeight)
             if (radius < 0F) radius = (properHeight / 2.0F)
-            contentLayout?.minimumWidth = properWidth
-            contentLayout?.minimumHeight = properHeight
+            if (contentFillsChip) {
+                contentLayout?.minimumWidth = properWidth
+                contentLayout?.minimumHeight = properHeight
+            }
         }
     }
     
