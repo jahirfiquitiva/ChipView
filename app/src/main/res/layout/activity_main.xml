@@ -71,6 +71,7 @@
         app:chipIcon="@drawable/ic_palette"
         app:chipText="FAB?"
         app:chipTextColor="#fff"
+        app:chipContentFillsChip="true"
         app:cardElevation="6dp" />
 
     <com.jahirfiquitiva.chip.ChipView
