@@ -42,7 +42,6 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:padding="4dp"
         android:clipToPadding="false"
         android:clipChildren="false"
         android:animateLayoutChanges="true"
