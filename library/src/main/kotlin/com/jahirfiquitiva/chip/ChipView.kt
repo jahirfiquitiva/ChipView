@@ -168,9 +168,9 @@ open class ChipView @JvmOverloads constructor(
             val properWidth = if (measuredWidth < minWidth) minWidth else measuredWidth
             setMeasuredDimension(properWidth, properHeight)
             if (radius < 0F) radius = (properHeight / 2.0F)
-            val horPadding = (radius / 2.0F).roundToInt()
-            setPaddingHorizontal(horPadding)
-            setPaddingVertical((horPadding / 2.0F).roundToInt())
+            // val horPadding = (radius / 2.0F).roundToInt()
+            // setPaddingHorizontal(horPadding)
+            // setPaddingVertical((horPadding / 2.0F).roundToInt())
             if (contentFillsChip) {
                 contentLayout?.minimumWidth = properWidth
                 contentLayout?.minimumHeight = properHeight
@@ -308,6 +308,7 @@ open class ChipView @JvmOverloads constructor(
         contentLayout?.setPadding(left, top, right, bottom)
     }
     
+    /*
     fun setPaddingLeft(left: Int) {
         contentLayout?.setPaddingLeft(left)
     }
@@ -335,6 +336,7 @@ open class ChipView @JvmOverloads constructor(
     fun setPadding(padding: Int) {
         contentLayout?.setPadding(padding)
     }
+    */
     
     private fun internalSetBackground() {
         val fgResId: Int = try {

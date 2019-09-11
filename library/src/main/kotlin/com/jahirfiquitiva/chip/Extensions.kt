@@ -57,6 +57,7 @@ internal fun Int.darken(
     return Color.argb(Color.alpha(this), red, green, blue)
 }
 
+/*
 internal fun View.setPaddingLeft(padding: Int) = setPadding(padding, KAU_LEFT)
 
 internal fun View.setPaddingTop(padding: Int) = setPadding(padding, KAU_TOP)
@@ -86,3 +87,4 @@ private const val KAU_BOTTOM = ViewDragHelper.EDGE_BOTTOM
 private const val KAU_HORIZONTAL = KAU_LEFT or KAU_RIGHT
 private const val KAU_VERTICAL = KAU_TOP or KAU_BOTTOM
 private const val KAU_ALL = KAU_HORIZONTAL or KAU_VERTICAL
+*/
