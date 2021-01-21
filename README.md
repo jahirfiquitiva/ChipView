@@ -2,7 +2,7 @@
 
 ![API](https://img.shields.io/badge/API-16%2B-34bf49.svg)
 [![JitPack](https://jitpack.io/v/jahirfiquitiva/ChipView.svg)](https://jitpack.io/#jahirfiquitiva/ChipView)
-[![Build Status](https://travis-ci.com/jahirfiquitiva/ChipView.svg?branch=master)](https://travis-ci.com/jahirfiquitiva/ChipView)
+[![Build Status](https://travis-ci.com/jahirfiquitiva/ChipView.svg?branch=main)](https://travis-ci.com/jahirfiquitiva/ChipView)
 
 Yep, another Material Design Chip view library. Just because no other chip library has been able to provide the simplicity I need (regardless of all their features).
 
@@ -13,7 +13,7 @@ You can download a [sample app here](http://j.mp/ChipViewSample).
 # Preview
 
 <p>
-<img src="https://github.com/jahirfiquitiva/ChipView/raw/master/preview.png" height="400"/>
+<img src="https://github.com/jahirfiquitiva/ChipView/raw/main/preview.png" height="400"/>
 </p>
 
 ---
@@ -41,7 +41,7 @@ where `{latest version}` corresponds to published version in   [![JitPack](https
 
 
 ## How to implement
-:page_with_curl: You can check the **[sample App](https://github.com/jahirfiquitiva/ChipView/tree/master/app/src/main)** for details
+:page_with_curl: You can check the **[sample App](https://github.com/jahirfiquitiva/ChipView/tree/main/app/src/main)** for details
 
 ---
 
