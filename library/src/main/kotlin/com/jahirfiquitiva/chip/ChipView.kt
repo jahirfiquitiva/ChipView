@@ -388,7 +388,7 @@ open class ChipView @JvmOverloads constructor(
             context.theme.resolveAttribute(android.R.attr.actionBarItemBackground, outValue, true)
             actionIconView?.setBackgroundResource(outValue.resourceId)
         } catch (e: Exception) {
-            Log.e("ChipView", e.message)
+            Log.e("ChipView", e.message.toString())
         }
         actionIconView?.isClickable = true
         actionIconView?.isFocusable = true
