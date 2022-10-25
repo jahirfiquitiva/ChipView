@@ -23,6 +23,11 @@
         <attr name="chipTextSize" format="dimension|reference" />
         <attr name="chipRadius" format="dimension|reference" />
         <attr name="chipIcon" format="reference" />
+        <attr name="chipTextIconLeft" format="reference" />
+        <attr name="chipTextIconRight" format="reference" />
+        <attr name="chipTextIconTop" format="reference" />
+        <attr name="chipTextIconBottom" format="reference" />
+        <attr name="chipTextIconPadding" format="dimension|reference" />
         <attr name="chipActionIcon" format="reference" />
         <attr name="chipStrokeWidth" format="dimension|reference" />
         <attr name="chipStrokeColor" format="color|reference" />
