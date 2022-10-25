@@ -13,7 +13,7 @@ You can download a [sample app here](http://j.mp/ChipViewSample).
 # Preview
 
 <p>
-<img src="https://github.com/jahirfiquitiva/ChipView/raw/main/preview.png" height="400"/>
+<img src="https://user-images.githubusercontent.com/20037228/197754499-0a9f5889-5f76-471b-b0f5-015fb55a17e3.png" height="400"/>
 </p>
 
 ---
