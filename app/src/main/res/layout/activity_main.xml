@@ -42,6 +42,21 @@
         app:chipIcon="@drawable/ic_palette" />
 
     <com.jahirfiquitiva.chip.ChipView
+        android:id="@+id/icon_chip_text_icon"
+        android:layout_margin="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:chipRadius="8dp"
+        app:chipBgColor="#345"
+        app:chipTextColor="#fff"
+        app:chipText="I am Chip with drawable and padding"
+        app:chipTextIconPadding="10dp"
+        app:chipTextIconRight="@drawable/ic_palette"
+        app:chipTextIconTop="@drawable/ic_palette"
+        app:chipTextIconLeft="@drawable/ic_palette"
+        app:chipTextIconBottom="@drawable/ic_palette" />
+
+    <com.jahirfiquitiva.chip.ChipView
         android:id="@+id/action_chip"
         android:layout_margin="6dp"
         android:layout_width="wrap_content"

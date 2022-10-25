@@ -143,6 +143,13 @@ open class ChipView @JvmOverloads constructor(
             rippleColor = styles.getColor(R.styleable.ChipView_chipRippleColor, 0)
             
             setIcon(styles.getDrawable(R.styleable.ChipView_chipIcon))
+            setImageToText(
+                styles.getDrawable(R.styleable.ChipView_chipTextIconLeft),
+                styles.getDrawable(R.styleable.ChipView_chipTextIconTop),
+                styles.getDrawable(R.styleable.ChipView_chipTextIconBottom),
+                styles.getDrawable(R.styleable.ChipView_chipTextIconRight)
+                )
+            setPaddingForImageAndText(styles.getDimension(R.styleable.ChipView_chipTextIconPadding, 0F).roundToInt())
             setActionIcon(styles.getDrawable(R.styleable.ChipView_chipActionIcon))
             
             super.setRadius(0F)
@@ -276,6 +283,16 @@ open class ChipView @JvmOverloads constructor(
     @CallSuper
     open fun setActionIcon(actionIcon: Icon?) {
         actionIconView?.setImageIcon(actionIcon)
+    }
+    
+    @CallSuper
+    open fun setImageToText(leftDrawable: Drawable?, topDrawable: Drawable?, bottomDrawable: Drawable?, rightDrawable: Drawable?) {
+        textView?.setCompoundDrawablesWithIntrinsicBounds(leftDrawable, topDrawable, bottomDrawable, rightDrawable)
+    }
+
+    @CallSuper
+    open fun setPaddingForImageAndText(textDrawablePadding: Int) {
+        textView?.compoundDrawablePadding = textDrawablePadding
     }
     
     @ColorInt
